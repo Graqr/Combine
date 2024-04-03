@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.graqr
+testFramework: spock
+sourceLanguage: kotlin
+buildTool: gradle_kotlin
+features: [app-name, gradle, http-client-test, kotlin, kotlin-application, ksp, logback, micronaut-aot, micronaut-build, micronaut-http-validation, netty-server, properties, readme, serialization-jackson, shade, spock, static-resources]
