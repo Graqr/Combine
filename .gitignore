@@ -1,0 +1,63 @@
+# IntelliJ IDEA specific files
+/.idea/
+*.iml
+*.ipr
+*.iws
+
+# Gradle specific files
+/build/
+*.gradle
+!build.gradle.kts  # Keep your Gradle build script
+
+# Output directories
+/out/
+
+# JVM bytecode
+*.class
+
+# Test coverage reports
+**/coverage/*
+
+# IDE generated class files (IntelliJ IDEA & Android Studio)
+*.form
+*.form.meta
+*.idea/artifacts
+*.idea/libraries
+*.idea/modules
+*.idea/vfs.index.temp
+
+# OS specific temporary files
+#*.swp
+#*.DS_Store
+*.tmp
+
+# Target specific generated files
+target/
+
+# Cache directories
+**/.gradle/
+**/.cache/
+
+# Local environmental configuration
+.env
+
+# IDE scratch files
+*.idea/misc.xml
+
+# Markdown live preview data (IntelliJ IDEA)
+*.idea/preview/
+
+# End-to-end test reports
+**/test-results/*
+
+# Dependency Lock files
+**/.lock
+
+# CI/CD build artifacts
+**/build.artifact
+
+# Optimized Kotlin bytecode
+*.kotlin_module
+
+# Generated Kotlin metadata files
+*.kotlin_metadata
