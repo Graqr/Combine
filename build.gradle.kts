@@ -42,7 +42,7 @@ dependencies {
 version = "0.0.1"
 group = "com.graqr"
 var jdkVersion = "17"
-val kotlinVersion = project.properties.get("kotlinVersion")
+val kotlinVersion = project.properties["kotlinVersion"]
 
 // configuration -----------------
 application { mainClass.set("com.graqr.ApplicationKt") }
@@ -73,15 +73,14 @@ micronaut {
 tasks.named<io.micronaut.gradle.docker.MicronautDockerfile>("dockerfile") {
     baseImage("eclipse-temurin:$jdkVersion-jre-jammy")
 }
+
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") { jdkVersion.set(jdkVersion) }
 task("loadEnv") {
     val envVars = Properties()
     file(".env").reader().use { reader -> envVars.load(reader) }
-
     envVars.forEach { key, value ->
         System.setProperty(key.toString(), value.toString())
     }
-
     println("Loaded environment variables from .env")
 }
 
