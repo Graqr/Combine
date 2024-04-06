@@ -36,6 +36,11 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     testImplementation("io.micronaut:micronaut-http-client")
+
+    //micronaut console
+    implementation("io.micronaut.controlpanel:micronaut-control-panel-ui")
+    implementation("io.micronaut.controlpanel:micronaut-control-panel-management")
+    runtimeOnly("io.micronaut.:micronaut-management")
 }
 
 // properties --------------------
