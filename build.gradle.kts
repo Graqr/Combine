@@ -8,7 +8,6 @@ plugins {
     id("groovy")
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "4.3.5"
-    id("io.micronaut.aot") version "4.3.5"
 }
 
 // repos --------------------------
@@ -55,17 +54,6 @@ micronaut {
     processing {
         incremental(true)
         annotations("com.graqr.*")
-    }
-    aot {
-        // Please review carefully the optimizations enabled below
-        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
-        optimizeServiceLoading.set(false)
-        convertYamlToJava.set(false)
-        precomputeOperations.set(true)
-        cacheEnvironment.set(true)
-        optimizeClassLoading.set(true)
-        deduceEnvironment.set(true)
-        optimizeNetty.set(true)
     }
 }
 
