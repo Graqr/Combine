@@ -1,5 +1,3 @@
-import java.util.*
-
 // plugins -----------------------
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.23"
@@ -13,14 +11,13 @@ plugins {
 // repos --------------------------
 repositories {
     mavenCentral()
-    maven {
-        url = uri("https://maven.pkg.github.com/graqr/threshr")
-        credentials {
-            username = System.getenv("USERNAME")
-            password = System.getenv("TOKEN")
-        }
-    }
 }
+// properties --------------------
+version = "0.0.1"
+group = "com.graqr"
+var jdkVersion = "17"
+var threshrVersion = "0.0.12"
+val kotlinVersion = project.properties["kotlinVersion"]
 
 //dependencies --------------------
 dependencies {
@@ -30,19 +27,15 @@ dependencies {
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
-    implementation("com.graqr.threshr:0.0.11")
+    implementation("com.graqr:threshr:${threshrVersion}") {
+        exclude(group = "org.apache.maven.reporting", module = "maven-reporting-api")
+    }
     compileOnly("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.yaml:snakeyaml")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     testImplementation("io.micronaut:micronaut-http-client")
 }
-
-// properties --------------------
-version = "0.0.1"
-group = "com.graqr"
-var jdkVersion = "17"
-val kotlinVersion = project.properties["kotlinVersion"]
 
 // configuration -----------------
 application { mainClass.set("com.graqr.ApplicationKt") }
@@ -58,19 +51,5 @@ micronaut {
     }
 }
 
-// tasks --------------------------
-tasks.named<io.micronaut.gradle.docker.MicronautDockerfile>("dockerfile") {
-    baseImage("eclipse-temurin:$jdkVersion-jre-jammy")
-}
-
-tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") { jdkVersion.set(jdkVersion) }
-task("loadEnv") {
-    val envVars = Properties()
-    file(".env").reader().use { reader -> envVars.load(reader) }
-    envVars.forEach { key, value ->
-        System.setProperty(key.toString(), value.toString())
-    }
-    println("Loaded environment variables from .env")
-}
 
 
